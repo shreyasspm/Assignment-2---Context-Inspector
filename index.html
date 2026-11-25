@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Context Inspector prototype</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div>
+    <h1>Context Inspector <span class="tag">prototype</span></h1>
+    <p class="sub">Coding-assistant chat with a simulated assistant. Nothing is sent over the network.</p>
+  </div>
+  <div class="controls">
+    <label class="switch" title="Switch between the two study conditions">
+      <input type="checkbox" id="toggleInspector" checked>
+      <span>Context Inspector</span>
+    </label>
+    <button id="btnGuide" class="ghost">Walkthrough</button>
+    <button id="btnLog" class="ghost">Export log</button>
+    <button id="btnReset" class="ghost">Reset</button>
+  </div>
+</header>
+
+<details id="guide" open>
+  <summary>Walkthrough (about 2 minutes)</summary>
+  <ol>
+    <li>Press <b>Use next scripted message</b> then <b>Send</b>, five times. Message 1 sets a rule: <i>never modify my architecture, fix bugs only</i>.</li>
+    <li>Reply 5 proposes a rewrite. The chat gives no sign that the rule was lost.</li>
+    <li>Open the Inspector (right). Turns 1&ndash;3 were replaced by a system summary, and your rule sentence is flagged as missing.</li>
+    <li>Fix it: <b>Show originals</b>, then <b>Pin</b> the flagged sentence (or <b>Restore originals</b>).</li>
+    <li>Press <b>Re-answer</b>. Compare v1 and v2 on the reply. <b>Undo</b> reverses any Inspector action.</li>
+    <li>Try the other condition: switch the Inspector off and repeat. Your only fix is to retype the rule.</li>
+  </ol>
+</details>
+
+<main>
+  <section id="chatPane" aria-label="Chat">
+    <div id="chat"></div>
+    <form id="form" autocomplete="off">
+      <div id="scriptRow"></div>
+      <div class="row">
+        <textarea id="input" rows="2" placeholder="Message the assistant (simulated)" aria-label="Message"></textarea>
+        <button type="submit" class="primary">Send</button>
+      </div>
+    </form>
+  </section>
+  <aside id="inspector" aria-label="Context Inspector"></aside>
+</main>
+
+<footer>
+  <details>
+    <summary>Simulator internals (not part of the design)</summary>
+    <div id="debug"></div>
+  </details>
+</footer>
+<div id="status" class="sr-only" role="status" aria-live="polite"></div>
+
+<script src="core.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
